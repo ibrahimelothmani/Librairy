@@ -23,6 +23,7 @@ class BookRepository extends ServiceEntityRepository
         parent::__construct($registry, Book::class);
     }
 
+
     public function findBooksAndCategory($min, $max, User $user = null, Category $category = null)
     {
       $request = $this->createQueryBuilder('b')

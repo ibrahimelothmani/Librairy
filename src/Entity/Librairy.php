@@ -2,41 +2,36 @@
 
 namespace App\Entity;
 
+use App\Repository\LibrairyRepository;
 use Doctrine\Common\Collections\ArrayCollection;
 use Doctrine\Common\Collections\Collection;
 use Doctrine\ORM\Mapping as ORM;
 
-/**
- * @ORM\Entity(repositoryClass="App\Repository\LibrairyRepository")
- */
+#[ORM\Entity(repositoryClass: LibrairyRepository::class)]
 class Librairy
 {
-    /**
-     * @ORM\Id()
-     * @ORM\GeneratedValue()
-     * @ORM\Column(type="integer")
-     */
-    private $id;
+    #[ORM\Id]
+    #[ORM\GeneratedValue]
+    #[ORM\Column]
+    private ?int $id = null;
+
+    #[ORM\Column(length: 255)]
+    private ?string $name = null;
+
+    #[ORM\Column(length: 255)]
+    private ?string $city = null;
 
     /**
-     * @ORM\Column(type="string", length=255)
+     * @var Collection<int, Book>
      */
-    private $name;
+    #[ORM\OneToMany(targetEntity: Book::class, mappedBy: 'librairy1')]
+    private Collection $books;
 
     /**
-     * @ORM\Column(type="string", length=255)
+     * @var Collection<int, User>
      */
-    private $city;
-
-    /**
-     * @ORM\OneToMany(targetEntity="App\Entity\Book", mappedBy="librairy")
-     */
-    private $books;
-
-    /**
-     * @ORM\OneToMany(targetEntity="App\Entity\User", mappedBy="librairy")
-     */
-    private $users;
+    #[ORM\OneToMany(targetEntity: User::class, mappedBy: 'librairy1')]
+    private Collection $users;
 
     public function __construct()
     {
@@ -54,7 +49,7 @@ class Librairy
         return $this->name;
     }
 
-    public function setName(string $name): self
+    public function setName(string $name): static
     {
         $this->name = $name;
 
@@ -66,7 +61,7 @@ class Librairy
         return $this->city;
     }
 
-    public function setCity(string $city): self
+    public function setCity(string $city): static
     {
         $this->city = $city;
 
@@ -74,30 +69,29 @@ class Librairy
     }
 
     /**
-     * @return Collection|Book[]
+     * @return Collection<int, Book>
      */
     public function getBooks(): Collection
     {
         return $this->books;
     }
 
-    public function addBook(Book $book): self
+    public function addBook(Book $book): static
     {
         if (!$this->books->contains($book)) {
-            $this->books[] = $book;
-            $book->setLibrairy($this);
+            $this->books->add($book);
+            $book->setLibrairy1($this);
         }
 
         return $this;
     }
 
-    public function removeBook(Book $book): self
+    public function removeBook(Book $book): static
     {
-        if ($this->books->contains($book)) {
-            $this->books->removeElement($book);
+        if ($this->books->removeElement($book)) {
             // set the owning side to null (unless already changed)
-            if ($book->getLibrairy() === $this) {
-                $book->setLibrairy(null);
+            if ($book->getLibrairy1() === $this) {
+                $book->setLibrairy1(null);
             }
         }
 
@@ -105,30 +99,29 @@ class Librairy
     }
 
     /**
-     * @return Collection|User[]
+     * @return Collection<int, User>
      */
     public function getUsers(): Collection
     {
         return $this->users;
     }
 
-    public function addUser(User $user): self
+    public function addUser(User $user): static
     {
         if (!$this->users->contains($user)) {
-            $this->users[] = $user;
-            $user->setLibrairy($this);
+            $this->users->add($user);
+            $user->setLibrairy1($this);
         }
 
         return $this;
     }
 
-    public function removeUser(User $user): self
+    public function removeUser(User $user): static
     {
-        if ($this->users->contains($user)) {
-            $this->users->removeElement($user);
+        if ($this->users->removeElement($user)) {
             // set the owning side to null (unless already changed)
-            if ($user->getLibrairy() === $this) {
-                $user->setLibrairy(null);
+            if ($user->getLibrairy1() === $this) {
+                $user->setLibrairy1(null);
             }
         }
 

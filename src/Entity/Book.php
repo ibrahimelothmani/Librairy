@@ -2,63 +2,47 @@
 
 namespace App\Entity;
 
+use App\Repository\BookRepository;
+use Doctrine\DBAL\Types\Types;
 use Doctrine\ORM\Mapping as ORM;
 
-/**
- * @ORM\Entity(repositoryClass=App\Repository\BookRepository::class)
- */
+#[ORM\Entity(repositoryClass: BookRepository::class)]
 class Book
 {
-    /**
-     * @ORM\Id
-     * @ORM\GeneratedValue
-     * @ORM\Column(type="integer")
-     */
-    private $id;
+    #[ORM\Id]
+    #[ORM\GeneratedValue]
+    #[ORM\Column]
+    private ?int $id = null;
 
-    /**
-     * @ORM\Column(type="string", length=255)
-     */
-    private $title;
+    #[ORM\Column(length: 255)]
+    private ?string $title = null;
 
-    /**
-     * @ORM\Column(type="string", length=255)
-     */
-    private $author;
+    #[ORM\Column(length: 255)]
+    private ?string $author = null;
 
-    /**
-     * @ORM\Column(type="text")
-     */
-    private $summary;
+    #[ORM\Column(type: Types::TEXT)]
+    private ?string $summary = null;
 
-    /**
-     * @ORM\Column(type="date")
-     */
-    private $publication;
+    #[ORM\Column(type: Types::DATE_MUTABLE)]
+    private ?\DateTimeInterface $publication = null;
 
-    /**
-     * @ORM\Column(type="boolean")
-     */
-    private $availability;
+    #[ORM\Column]
+    private ?bool $availability = null;
 
-    /**
-     * @ORM\ManyToOne(targetEntity=Category::class, inversedBy="books")
-     * @ORM\JoinColumn(nullable=false)
-     */
-    private $category;
+    #[ORM\ManyToOne(inversedBy: 'books')]
+    #[ORM\JoinColumn(nullable: false)]
+    private ?Category $category = null;
 
-    /**
-     * @ORM\ManyToOne(targetEntity=User::class, inversedBy="books")
-     */
-    private $borrower;
+    #[ORM\ManyToOne(inversedBy: 'Books')]
+    private ?User $borrower = null;
 
-    /**
-     * @ORM\ManyToOne(targetEntity=Librairy::class, inversedBy="books")
-     * @ORM\JoinColumn(nullable=false)
-     */
-    private $librairy;
+    #[ORM\ManyToOne(inversedBy: 'Lbooks')]
+    #[ORM\JoinColumn(nullable: false)]
+    private ?Librairy $librairy = null;
 
-    // Getters et setters
+    #[ORM\ManyToOne(inversedBy: 'books')]
+    #[ORM\JoinColumn(nullable: false)]
+    private ?Librairy $librairy1 = null;
 
     public function getId(): ?int
     {
@@ -70,9 +54,10 @@ class Book
         return $this->title;
     }
 
-    public function setTitle(string $title): self
+    public function setTitle(string $title): static
     {
         $this->title = $title;
+
         return $this;
     }
 
@@ -81,9 +66,10 @@ class Book
         return $this->author;
     }
 
-    public function setAuthor(string $author): self
+    public function setAuthor(string $author): static
     {
         $this->author = $author;
+
         return $this;
     }
 
@@ -92,9 +78,10 @@ class Book
         return $this->summary;
     }
 
-    public function setSummary(string $summary): self
+    public function setSummary(string $summary): static
     {
         $this->summary = $summary;
+
         return $this;
     }
 
@@ -103,20 +90,22 @@ class Book
         return $this->publication;
     }
 
-    public function setPublication(\DateTimeInterface $publication): self
+    public function setPublication(\DateTimeInterface $publication): static
     {
         $this->publication = $publication;
+
         return $this;
     }
 
-    public function getAvailability(): ?bool
+    public function isAvailability(): ?bool
     {
         return $this->availability;
     }
 
-    public function setAvailability(bool $availability): self
+    public function setAvailability(bool $availability): static
     {
         $this->availability = $availability;
+
         return $this;
     }
 
@@ -125,9 +114,10 @@ class Book
         return $this->category;
     }
 
-    public function setCategory(Category $category): self
+    public function setCategory(?Category $category): static
     {
         $this->category = $category;
+
         return $this;
     }
 
@@ -136,10 +126,9 @@ class Book
         return $this->borrower;
     }
 
-    public function setBorrower(?User $borrower): self
+    public function setBorrower(?User $borrower): static
     {
         $this->borrower = $borrower;
-        $this->setAvailability(!$borrower);
 
         return $this;
     }
@@ -149,9 +138,22 @@ class Book
         return $this->librairy;
     }
 
-    public function setLibrairy(Librairy $librairy): self
+    public function setLibrairy(?Librairy $librairy): static
     {
         $this->librairy = $librairy;
+
+        return $this;
+    }
+
+    public function getLibrairy1(): ?Librairy
+    {
+        return $this->librairy1;
+    }
+
+    public function setLibrairy1(?Librairy $librairy1): static
+    {
+        $this->librairy1 = $librairy1;
+
         return $this;
     }
 }

@@ -58,9 +58,20 @@ class User implements UserInterface, PasswordAuthenticatedUserInterface
     #[ORM\JoinColumn(nullable: false)]
     private ?Librairy $librairy = null;
 
+    /**
+     * @var Collection<int, Book>
+     */
+    #[ORM\OneToMany(targetEntity: Book::class, mappedBy: 'borrower')]
+    private Collection $Books;
+
+    #[ORM\ManyToOne(inversedBy: 'users')]
+    #[ORM\JoinColumn(nullable: false)]
+    private ?Librairy $librairy1 = null;
+
     public function __construct()
     {
         $this->books = new ArrayCollection();
+        $this->Books = new ArrayCollection();
     }
 
     public function getId(): ?int
@@ -223,6 +234,18 @@ class User implements UserInterface, PasswordAuthenticatedUserInterface
     public function setLibrairy(?Librairy $librairy): static
     {
         $this->librairy = $librairy;
+
+        return $this;
+    }
+
+    public function getLibrairy1(): ?Librairy
+    {
+        return $this->librairy1;
+    }
+
+    public function setLibrairy1(?Librairy $librairy1): static
+    {
+        $this->librairy1 = $librairy1;
 
         return $this;
     }
