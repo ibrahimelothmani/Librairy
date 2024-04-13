@@ -22,7 +22,7 @@ class LibrairianController extends AbstractController
 {
     public function __construct(private EntityManagerInterface $entityManager) {}
 
-    #[Route('/', methods: ['GET'])]
+    #[Route('/librairian', methods: ['GET'])]
     #[Route('/librairian/{page}', name: 'librairian', requirements: ['page' => '\d+'])]
     public function index(Request $request, Pagination $pagination, int $page = 1): Response
     {

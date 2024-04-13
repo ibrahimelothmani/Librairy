@@ -1,18 +1,137 @@
-{% block title %}Hello FrontendController!{% endblock %}
+<!DOCTYPE html>
+<html lang="fr">
 
-{% block body %}
-<style>
-    .example-wrapper { margin: 1em auto; max-width: 800px; width: 95%; font: 18px/1.5 sans-serif; }
-    .example-wrapper code { background: #F5F5F5; padding: 2px 6px; }
-</style>
+	<head>
+		<meta charset="UTF-8">
+		<meta http-equiv="X-UA-Compatible" content="IE=edge">
+		<meta name="viewport" content="width=device-width, initial-scale=1.0">
+		<title>Bibliothèque Tunisienne</title>
+		<!-- Lien vers Bootstrap CSS -->
 
-<div class="example-wrapper">
-    <h1>Hello {{ controller_name }}! ✅</h1>
+		<link href="https://cdn.jsdelivr.net/npm/bootstrap@5.1.3/dist/css/bootstrap.min.css" rel="stylesheet">
 
-    This friendly message is coming from:
-    <ul>
-        <li>Your controller at <code>C:/Users/TN1998/OneDrive/Bureau/Belge/Librairy/src/Controller/FrontendController.php</code></li>
-        <li>Your template at <code>C:/Users/TN1998/OneDrive/Bureau/Belge/Librairy/templates/frontend/index.html.twig</code></li>
-    </ul>
+	</head>
+
+	<body>
+		<!-- Barre de navigation -->
+		<nav class="navbar navbar-expand-lg navbar-dark bg-primary">
+			<div class="container-fluid">
+				<a class="navbar-brand" href="#">Bibliothèque Tunisienne</a>
+				<button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNav" aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">
+					<span class="navbar-toggler-icon"></span>
+				</button>
+				<div class="collapse navbar-collapse" id="navbarNav">
+					<ul class="navbar-nav ms-auto">
+						<li class="nav-item">
+							<a class="nav-link active" aria-current="page" href="#">Accueil</a>
+						</li>
+						<li class="nav-item">
+							<a class="nav-link" href="#">À propos</a>
+						</li>
+						<li class="nav-item">
+							<a class="nav-link" href="#">Collections</a>
+						</li>
+						<li class="nav-item">
+							<a class="nav-link" href="{{ path("app_login")}}">Connexion</a>
+						</li>
+						<li class="nav-item">
+							<a class="nav-link" href="{{ path("app_register")}}">Registrer</a>
+						</li>
+
+					</ul>
+				</div>
+			</div>
+		</nav>
+
+		<!-- Jumbotron -->
+		<div class="jumbotron bg-light text-center py-5">
+			<h1 class="display-4">Bienvenue à la Bibliothèque Tunisienne</h1>
+			<p class="lead">Découvrez nos collections, nos événements et bien plus encore !</p>
+		</div>
+
+<div class="container my-5">
+    <h2 class="mb-4">Nos Collections</h2>
+    <div class="row">
+        <!-- Première ligne de cartes -->
+        <div class="col-md-4 mb-4">
+            <div class="card">
+                <img src="https://source.unsplash.com/400x300/?book" class="card-img-top" alt="Livres anciens">
+                <div class="card-body">
+                    <h5 class="card-title">Livres Anciens</h5>
+                    <p class="card-text">Explorez notre vaste collection de livres anciens de l'histoire de la Tunisie.</p>
+                    <a href="#" class="btn btn-primary">En savoir plus</a>
+                </div>
+            </div>
+        </div>
+        <div class="col-md-4 mb-4">
+            <div class="card">
+                <img src="https://source.unsplash.com/400x300/?library" class="card-img-top" alt="Nouveautés">
+                <div class="card-body">
+                    <h5 class="card-title">Nouveautés</h5>
+                    <p class="card-text">Découvrez les dernières acquisitions de notre bibliothèque.</p>
+                    <a href="#" class="btn btn-primary">En savoir plus</a>
+                </div>
+            </div>
+        </div>
+        <div class="col-md-4 mb-4">
+            <div class="card">
+                <img src="https://source.unsplash.com/400x300/?reading" class="card-img-top" alt="Ressources numériques">
+                <div class="card-body">
+                    <h5 class="card-title">Ressources Numériques</h5>
+                    <p class="card-text">Accédez à nos ressources numériques et services en ligne.</p>
+                    <a href="#" class="btn btn-primary">En savoir plus</a>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- Deuxième ligne de cartes -->
+    <div class="row">
+        <div class="col-md-4 mb-4">
+            <div class="card">
+                <img src="https://source.unsplash.com/400x300/?magazines" class="card-img-top" alt="Magazines">
+                <div class="card-body">
+                    <h5 class="card-title">Magazines</h5>
+                    <p class="card-text">Parcourez notre sélection de magazines locaux et internationaux.</p>
+                    <a href="#" class="btn btn-primary">En savoir plus</a>
+                </div>
+            </div>
+        </div>
+        <div class="col-md-4 mb-4">
+            <div class="card">
+                <img src="https://source.unsplash.com/400x300/?history" class="card-img-top" alt="Histoire">
+                <div class="card-body">
+                    <h5 class="card-title">Histoire</h5>
+                    <p class="card-text">Découvrez notre collection d'ouvrages sur l'histoire tunisienne et mondiale.</p>
+                    <a href="#" class="btn btn-primary">En savoir plus</a>
+                </div>
+            </div>
+        </div>
+        <div class="col-md-4 mb-4">
+            <div class="card">
+                <img src="https://source.unsplash.com/400x300/?children-books" class="card-img-top" alt="Livres pour enfants">
+                <div class="card-body">
+                    <h5 class="card-title">Livres pour Enfants</h5>
+                    <p class="card-text">Découvrez notre collection variée de livres pour enfants de tous âges.</p>
+                    <a href="#" class="btn btn-primary">En savoir plus</a>
+                </div>
+            </div>
+        </div>
+    </div>
 </div>
-{% endblock %}
+
+
+		<!-- Footer -->
+		<footer class="bg-primary text-white text-center py-4">
+			<p>&copy; 2024 Bibliothèque Tunisienne. Tous droits réservés.</p>
+			<p>Contact:
+				<a href="mailto:ibrahim.ibrahim.elothmeni@gmail.com" class="text-white">Ibrahim</a>
+			</p>
+		</footer>
+
+		<!-- Lien vers Bootstrap JS et dépendances -->
+		<script src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.9.3/dist/umd/popper.min.js"></script>
+		<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.1.3/dist/js/bootstrap.bundle.min.js"></script>
+	</body>
+
+</html>
